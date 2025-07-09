@@ -6,7 +6,6 @@ const form = document.getElementById('form');
 const aiResponse = document.getElementById('aiResponse');
 
 const enviarFormulario = (event) => {
-    askButton.disabled = true;
     event.preventDefault();
     const apiKey = apiKeyInput.value;
     const game = gameSelect.value;
@@ -20,7 +19,7 @@ const enviarFormulario = (event) => {
         return;
     
     } 
-
+    askButton.disabled = true;
     askButton.textContent = 'Enviando...';
     askButton.classList.add('loading');
     return;

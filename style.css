@@ -125,12 +125,14 @@ button:hover {
   
 }
 
-button.disabled {
+button:disabled {
 
   transition: none;
   transform: translate(0);
   box-shadow: initial;
   cursor: not-allowed;
+  background-color: #129574;
+  opacity: 0.5;
 
 }
 
