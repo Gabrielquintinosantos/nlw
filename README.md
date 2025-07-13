@@ -20,6 +20,8 @@
 - Transfer
 - Protocol
     -Conjunto de regras
+- Methods HTTP (Verbos): Get, Post, Patch/Put, Delete
+- Headers (Cabeçalhos): Instruções/Informações extras para cada chamada
 
 # URL
 
@@ -84,3 +86,10 @@ Apartir disso o HTML é impactado visualmente
  - Document
  - Object
  - Model
+
+ # API
+
+- Application
+- Programming
+- Interface
+- JSON: JavaScript Object Notation

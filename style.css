@@ -127,16 +127,14 @@ button:hover {
 
 button:disabled {
 
-  transition: none;
-  transform: translate(0);
+  transition: initial;
+  transform: initial;
   box-shadow: initial;
   cursor: not-allowed;
-  background-color: #129574;
-  opacity: 0.5;
 
 }
 
-loading {
+.loading {
 
   animation: pulse 1s infinite;
 }
