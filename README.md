@@ -93,3 +93,26 @@ Apartir disso o HTML é impactado visualmente
 - Programming
 - Interface
 - JSON: JavaScript Object Notation
+
+# CDN
+
+- Content
+- Delivery
+- Network
+
+# LLM
+
+- Large
+- Language
+- Model
+
+# Agents
+
+- Tools: permitem o uso de códigos, apps, ou qualquer informação extra.
+- Melhor contexto
+
+# Engenharia de prompt
+
+- One shot: uma unica pergunta sem muito contexto
+- Few shot: é apresentado exemplos do que se espera
+- Chain of Thought: Cadeia de pensamento para a IA responder gradativamente conforma a instrução.

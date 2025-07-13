@@ -4,14 +4,43 @@ const questionInput = document.getElementById('questionSelect');
 const askButton = document.getElementById('askButton');
 const form = document.getElementById('form');
 const aiResponse = document.getElementById('aiResponse');
+const markdownToHTML = (text) => {
+    const converter = new showdown.Converter()
+    return converter.makeHtml(text)
+}
+
+
+
 
 //AIzaSyBQxlcwShNW_wMO0jkZUxmXeB4sSN8fugA - Chave de API*//
 const askAI = async (question, game, apiKey) => {
     const model = "gemini-2.5-flash";
     const geminiURL = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`
-    const ask = `olha, tenho esse jogo ${game}, e gostaria de saber ${question}
+    const ask = `
+    ## Especialidade
+    Voce é um especialista assitente de meta do jogo ${game}
+
+    ## Tarefa
+    Você deve responder as perguntas do usuário com base do seu conhecimento do jogo, estratégias, builds, dicas e combos das habilidades
+
+    ## Regras
+    -Se você não souber a responta, responda com "Slk num compensa" e não tente inventar uma resposta.
+    -Se a pergunta não for relacioanadda ao jogo, responda com "Slk num compensa, que jogo é esse parça?"
+    - Considere a data atual ${new Date().toLocaleDateString()}
+    - Faça pesquisas atualizadas sobre o patch atual, baseado na data atual, para dar uma resposta coerente.
+    - Nunca responda itens que você não tenha certeza de que existe no patch atual.
+    }
+    ## Resposta
+    - Economize na resposta, seja direto e responda no máximo com 1000 caracteres.
+    - Responda em markdown
+    - Não precisa fazer nenhuma saudação ou despedida, apenas responda a pergunta do usuário.
+
+    ---
+
+    Aqui está a pergunta do usuário: ${question}
     `
     const contents = [{
+        role: "user",
         parts: [{
             text: ask
             }]
@@ -24,14 +53,18 @@ const response = await fetch(geminiURL, {
         'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-        contents
+        contents,
+        tools
     })
 })
 
 const data = await response.json()
-console.log({ data })
-return
+return data.candidates[0].content.parts[0].text
 }
+
+const tools = [{
+    google_search: {}
+}]
 
 const enviarFormulario = async (event) => {
     event.preventDefault();
@@ -52,8 +85,9 @@ const enviarFormulario = async (event) => {
     
     try { // Perguntar para a IA*//
 
-        await askAI(question, game, apiKey)
-        
+        const text = await askAI(question, game, apiKey)
+        aiResponse.querySelector('.response-content').innerHTML = markdownToHTML(text);
+        aiResponse.classList.remove('hidden')
 
     }   catch (error) {
 
